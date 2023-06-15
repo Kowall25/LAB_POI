@@ -2,12 +2,20 @@
 from Lab1.generatorPointCloud import GeneratorPointCloud
 from Lab2.PlaneDBSCAN import PlaneDBSCAN
 from Lab2.PointCloud import PointCloud
+from Lab3.ImageProcessor import ImageProcessor
+from Lab3.TextureFeaturesExtractor import TextureFeaturesExtractor
+from Lab3.FeatureClassifier import TextureClassifier
+
+# Press Shift+F10 to execute it or replace it with your code.
+# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+
 
 def start_screen():
     while True:
         print("Choose LAB:")
         print("1. LAB 1")
         print("2. LAB 2")
+        print("3. LAB 3")
         print("4. Exit")
 
         lab = input("Enter the number of the LAB: ")
@@ -73,6 +81,34 @@ def start_screen():
                     break
                 else:
                     print("Invalid choice. Please try again.")
+
+        elif lab == '3':
+            while True:
+                print("1. Load textures and make texture samples")
+                print("2. Load point cloud from file and analyse DBSCAN.")
+                print("3. Classification of feature vectors using Support Vector Machines.")
+                print("4. Return to exercise selection")
+
+                choice = input("Enter the number of the operation you want to perform: ")
+                if choice == '1':
+                    width = int(input("Enter the width: "))
+                    length = int(input("Enter the length: "))
+                    input_dir = "img"
+                    output_dir = "textures_samples"
+                    image_processor = ImageProcessor(input_dir, output_dir, (512, 512), (width, length))
+                    image_processor.load_and_resize_images()
+                elif choice =='2':
+                    input_dir = 'textures_samples'
+                    texture_extractor = TextureFeaturesExtractor(input_dir)
+                    texture_extractor.extract_features()
+                elif choice =='3':
+                    classifier = TextureClassifier()
+                    features, labels = classifier.read_features_from_csv()
+                    classifier = TextureClassifier(features, labels)
+                    classifier.classify()
+                else:
+                    break
+
         else:
             break
             print("Invalid choice. Please try again.")
