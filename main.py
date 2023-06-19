@@ -85,7 +85,7 @@ def start_screen():
         elif lab == '3':
             while True:
                 print("1. Load textures and make texture samples")
-                print("2. Load point cloud from file and analyse DBSCAN.")
+                print("2. Create and save vectors to .csv.")
                 print("3. Classification of feature vectors using Support Vector Machines.")
                 print("4. Return to exercise selection")
 
